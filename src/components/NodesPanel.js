@@ -6,7 +6,7 @@ const onDragStart = (event, nodeType) => {
   event.dataTransfer.setData("application/reactflow", nodeType);
   event.dataTransfer.effectAllowed = "move";
 };
-
+// node panel more nodes can be added here 
 const NodesPanel = () => (
   <div>
     <div className="description">

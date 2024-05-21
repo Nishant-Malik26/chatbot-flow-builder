@@ -1,19 +1,20 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import ReactFlow, {
   addEdge,
   applyEdgeChanges,
   applyNodeChanges,
-  getOutgoers,
   getConnectedEdges,
 } from "reactflow";
 import "reactflow/dist/style.css";
 
 import MessageNode from "./MessageNode.js";
 
-import "../common.css";
 import NodesPanel from "./NodesPanel.js";
 import SaveButton from "./SaveButton.js";
 import SettingsPanel from "./SettingsPanel.js";
+
+import "../common.css";
+
 const rfStyle = {
   backgroundColor: "#B8CEFF",
 };
@@ -23,12 +24,10 @@ const nodeTypes = { textUpdater: MessageNode };
 
 function Flow() {
   const [selectedNode, setSelectedNode] = useState(null);
-  console.log("🚀 ~ Flow ~ selectedNode:", selectedNode);
 
   const [nodeId, setNodeId] = useState(0);
   const [nodes, setNodes] = useState(initialNodes);
   const [edges, setEdges] = useState([]);
-  console.log("🚀 ~ Flow ~ edges:", edges);
 
   const onNodesChange = useCallback(
     (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
@@ -44,14 +43,11 @@ function Flow() {
   );
 
   const onDragOver = (event) => {
-    // console.log("🚀 ~ onDragOver ~ event:", event);
     event.preventDefault();
     event.dataTransfer.dropEffect = "move";
   };
 
   const onNodeClick = (event, element) => {
-    console.log("🚀 ~ onNodeClick ~ element:", element);
-    // console.log("🚀 ~ onNodeClick ~ element:", element);
     if (element.type === "textUpdater") {
       setSelectedNode(element);
     }
@@ -60,17 +56,9 @@ function Flow() {
   const onNodeChange = (node) => {
     setNodes((els) => els.map((el) => (el.id === node.id ? node : el)));
   };
-
+// adding new node 
   const onDrop = (event) => {
-    console.log("🚀 ~ onDrop ~ event:", event);
     event.preventDefault();
-    // console.log("🚀 ~ onDrop ~ event.dataTransfer:", event.dataTransfer);
-    // const position = screenToFlowPosition({
-    //   x: event.clientX,
-    //   y: event.clientY,
-    // });
-    // console.log("🚀 ~ onDrop ~ nodes:", nodes);
-
     const newNode = {
       id: `node_${nodeId}`,
       type: "textUpdater",
@@ -79,11 +67,6 @@ function Flow() {
     };
 
     setNodes((es) => es.concat(newNode));
-    // setNodes((nds) => {
-    //   console.log(nds);
-    //   applyNodeChanges([newNode]);
-    // });
-
     setNodeId(nodeId + 1);
   };
 
@@ -92,8 +75,8 @@ function Flow() {
   };
 
   const outgoers = getConnectedEdges(nodes, edges);
-  console.log("🚀 ~ Flow ~ outgoers:", edges, nodes);
 
+  // validation for sources should not have more than one edge originating from it 
   const isValidConnection = (connection) => {
     const { source, target } = connection;
 

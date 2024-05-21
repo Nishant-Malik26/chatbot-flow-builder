@@ -11,6 +11,7 @@ const SaveButton = ({ nodes, edges }) => {
       }, [3000]);
     }
   }, [error]);
+  // validation for not more than 1 target handle should be empty
   const handleSave = () => {
     if (nodes.length - edges.length > 1) {
       setError("Error: More than one node has empty target handles.");

@@ -4,9 +4,7 @@ import "../common.css";
 
 function MessageNode(props) {
   const { data, isConnectable } = props;
-  // console.log("🚀 ~ MessageNode ~ data:", data);
-  // console.log("🚀 ~ MessageNode ~ isConnectable:", isConnectable);
-
+// Custom message node
   return (
     <>
       <div className="text-updater-node">

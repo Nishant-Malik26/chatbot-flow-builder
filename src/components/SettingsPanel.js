@@ -4,7 +4,7 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 
 const SettingsPanel = ({ node, onChange, handleBackButtonClick }) => {
   const [updatedNode, setUpdatedNode] = useState(node.data.label);
-
+  //updating text of selected node
   useEffect(() => {
     setUpdatedNode(node.data.label);
   }, [node]);
