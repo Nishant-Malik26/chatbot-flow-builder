@@ -1,0 +1,23 @@
+.messageNode {
+  padding: 10px;
+  border: 2px solid #299cda;
+  border-radius: 3px;
+  background-color: #fff;
+  margin-bottom: 10px;
+  cursor: grab;
+  width: 7rem;
+  margin-left: 4px;
+  margin-right: 4px;
+  margin-top: 1rem;
+  justify-content: center;
+  display: flex;
+  font-size: larger;
+  flex-direction: column;
+  align-items: center;
+}
+
+.description {
+  margin-left: 4px;
+  margin-right: 4px;
+  padding: 2px;
+}

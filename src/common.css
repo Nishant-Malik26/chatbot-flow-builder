@@ -1,0 +1,38 @@
+.node-header {
+  background-color: lightseagreen;
+  border-radius: 5px;
+  padding: 4px;
+}
+
+.text-updater-node {
+  min-height: 50px;
+  height: fit-content;
+  border: 1px solid #eee;
+  padding: 5px;
+  border-radius: 5px;
+  background: white;
+  width: 15rem;
+}
+
+.panel-header {
+  width: 100vh;
+  height: 5rem;
+  background-color: rgb(220, 234, 234);
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+.left-container {
+  flex-basis: 66.66%;
+  flex-grow: 1;
+}
+
+.right-container {
+  flex-basis: 33.33%;
+  flex-grow: 1;
+  border-left: 1px solid black;
+}

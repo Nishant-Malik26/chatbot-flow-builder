@@ -1,0 +1,22 @@
+.settings-panel {
+  margin-left: 4px;
+  margin-right: 4px;
+  padding: 2px;
+}
+
+.settings-panel textarea {
+  width: 95%;
+  padding: 5px;
+  margin-top: 7px;
+}
+
+.settings-panel div {
+  font-size: large;
+  margin-bottom: 1rem;
+}
+
+.back-button {
+  line-height: 1.5rem;
+  cursor: pointer;
+  
+}
