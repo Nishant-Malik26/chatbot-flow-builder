@@ -1,21 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./SaveButton.css";
 
 const SaveButton = ({ nodes, edges }) => {
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    if (error) {
+      setTimeout(() => {
+        setError(false);
+      }, [3000]);
+    }
+  }, [error]);
   const handleSave = () => {
-    console.log("🚀 ~ SaveButton ~ nodes:", edges);
-    const nodesWithNoTargets = nodes.filter(
-      (el) => el.sourcePosition && !el.targetPosition
-    );
-    if (nodesWithNoTargets.length > 1) {
-      alert("Error: More than one node has empty target handles.");
+    if (nodes.length - edges.length > 1) {
+      setError("Error: More than one node has empty target handles.");
     } else {
-      alert("Flow Saved");
+      setError("Flow Saved");
     }
   };
 
   return (
     <div className="btn-container">
+      {error && <span>{error}</span>}
       <button onClick={handleSave} className="save-button">
         Save Changes
       </button>

@@ -17,3 +17,14 @@
   right: 10px;
   color: blue;
 }
+
+.btn-container span {
+  background-color: rgb(241, 193, 201);
+  border-radius: 3px;
+  left: 35rem;
+  top: 10px;
+  color: black;
+  font-weight: 600;
+  position: absolute;
+  padding: 10px;
+}

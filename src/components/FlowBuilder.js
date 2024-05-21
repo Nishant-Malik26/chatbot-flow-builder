@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import ReactFlow, {
   addEdge,
   applyEdgeChanges,
@@ -18,14 +18,7 @@ const rfStyle = {
   backgroundColor: "#B8CEFF",
 };
 
-const initialNodes = [
-  {
-    id: "node-1",
-    type: "textUpdater",
-    position: { x: 0, y: 0 },
-    data: { label: 123 },
-  },
-];
+const initialNodes = [];
 const nodeTypes = { textUpdater: MessageNode };
 
 function Flow() {
@@ -35,6 +28,7 @@ function Flow() {
   const [nodeId, setNodeId] = useState(0);
   const [nodes, setNodes] = useState(initialNodes);
   const [edges, setEdges] = useState([]);
+  console.log("🚀 ~ Flow ~ edges:", edges);
 
   const onNodesChange = useCallback(
     (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
@@ -70,8 +64,6 @@ function Flow() {
   const onDrop = (event) => {
     console.log("🚀 ~ onDrop ~ event:", event);
     event.preventDefault();
-
-    const type = event.dataTransfer.getData("application/reactflow");
     // console.log("🚀 ~ onDrop ~ event.dataTransfer:", event.dataTransfer);
     // const position = screenToFlowPosition({
     //   x: event.clientX,
@@ -83,7 +75,7 @@ function Flow() {
       id: `node_${nodeId}`,
       type: "textUpdater",
       position: { x: event.clientX, y: event.clientY },
-      data: { label: `${type} Node` },
+      data: { label: "Hello There!!" },
     };
 
     setNodes((es) => es.concat(newNode));
@@ -100,7 +92,26 @@ function Flow() {
   };
 
   const outgoers = getConnectedEdges(nodes, edges);
-  console.log("🚀 ~ Flow ~ outgoers:", outgoers);
+  console.log("🚀 ~ Flow ~ outgoers:", edges, nodes);
+
+  const isValidConnection = (connection) => {
+    const { source, target } = connection;
+
+    if (source === target) {
+      return false;
+    }
+
+    const sourceNodeEdges = edges.filter(
+      (el) =>
+        el.source === source && el.sourceHandle === connection.sourceHandle
+    );
+
+    if (sourceNodeEdges.length > 0) {
+      return false;
+    }
+
+    return true;
+  };
 
   return (
     <>
@@ -118,8 +129,8 @@ function Flow() {
             onDragOver={onDragOver}
             onDrop={onDrop}
             nodeTypes={nodeTypes}
-            // fitView
             onNodeClick={onNodeClick}
+            isValidConnection={isValidConnection}
             style={rfStyle}
           />
         </div>
